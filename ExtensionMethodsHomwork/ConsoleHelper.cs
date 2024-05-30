@@ -10,13 +10,51 @@ namespace ExtensionMethodsHomwork
     {
         public static string RequestString(this string message)
         {
-            string output = "";
+            var output = "";
 
 
             while (string.IsNullOrWhiteSpace(output))
             {
-                Console.WriteLine(message);
+                Console.Write(message);
                 output = Console.ReadLine();
+            }
+
+            return output;
+        }
+
+        public static int RequestInt(this string message, int lower, int upper)
+        {
+            return message.RequestInt(true, lower, upper);
+        }
+
+        public static int RequestInt(this string message)
+        {
+            return message.RequestInt(false);
+        }
+
+        private static int RequestInt(this string message, bool useLowerUpper, int lower = 0, int upper = 0)
+        {
+            var output = 0;
+            var isValidAge = false;
+            var isInValidRange = true;
+
+            while (isValidAge == false || isInValidRange == false)
+            {
+                Console.Write(message);
+                isValidAge = int.TryParse(Console.ReadLine(), out output);
+
+                if (useLowerUpper == true)
+                {
+                    isInValidRange = (output >= lower && output <= upper);
+                    //if (output <= lower && output >= upper)
+                    //{
+                    //    isInValidRange = true;
+                    //}
+                    //else
+                    //{
+                    //    isInValidRange = false;
+                    //}
+                }
             }
 
             return output;
